@@ -1,9 +1,15 @@
 package ru.netology.rest;
 
+import io.restassured.path.json.config.JsonPathConfig;
+import org.codehaus.groovy.ast.Parameter;
 import org.junit.jupiter.api.Test;
+
+
+import java.util.Arrays;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
+import static org.codehaus.groovy.ast.tools.GeneralUtils.params;
 import static org.hamcrest.Matchers.equalTo;
 
 class MobileBankApiTestV1 {
@@ -18,10 +24,11 @@ class MobileBankApiTestV1 {
 
                 .body(matchesJsonSchemaInClasspath("accounts.schema.json"))
 
-                .body("[0].currency.enum[0]", equalTo("RUB"))
-                .body("[1].currency.enum[0]", equalTo("USD"))
-                .body("[2].currency.enum[0]", equalTo("RUB"));
+                .body("[0].currency", equalTo("RUB"))
+                .body("[1].currency", equalTo("USD"))
+                .body("[2].currency", equalTo("RUB"));
 
 
     }
+
 }
